@@ -1,4 +1,4 @@
-
+import { Input, InputLabel } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -18,6 +18,7 @@ import React, { useCallback, useContext, useState } from "react";
 import { withRouter, Redirect } from "react-router";
 import app from "../firebase";
 import { AuthContext } from "../Context/authContext";
+import { Label } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -77,24 +78,26 @@ const Login = ({ history }) => {
                     Sign in
                 </Typography>
                 <form onSubmit={handleLogin} className={classes.form} noValidate>
+                    <InputLabel>Email</InputLabel>
                     <TextField
+                        style={{"marginBottom": "3%"}}
                         variant="outlined"
                         margin="normal"
                         required
                         fullWidth
                         id="email"
-                        label="Email Address"
                         name="email"
                         autoComplete="email"
                         autoFocus
                     />
+                    <InputLabel>Password</InputLabel>
                     <TextField
+                        style={{"marginTop":"5%"}}
                         variant="outlined"
                         margin="normal"
                         required
                         fullWidth
                         name="password"
-                        label="Password"
                         type="password"
                         id="password"
                         autoComplete="current-password"

@@ -1,4 +1,5 @@
 import Avatar from '@material-ui/core/Avatar';
+import { InputLabel } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -64,47 +65,26 @@ const useStyles = makeStyles((theme) => ({
         </Typography>
         <form onSubmit={handleSignUp} className={classes.form} noValidate>
           <Grid container spacing={2}>
-            {/* <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-              />
-            </Grid> */}
             <Grid item xs={12}>
+              <InputLabel>Email</InputLabel>
               <TextField
+                style={{"marginTop": "5%"}}
                 variant="outlined"
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
                 name="email"
                 autoComplete="email"
               />
             </Grid>
             <Grid item xs={12}>
+              <InputLabel>Password</InputLabel>
               <TextField
+                style={{"marginTop": "5%"}}
                 variant="outlined"
                 required
                 fullWidth
                 name="password"
-                label="Password"
                 type="password"
                 id="password"
                 autoComplete="current-password"
