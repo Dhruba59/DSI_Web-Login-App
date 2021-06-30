@@ -1,24 +1,53 @@
-import logo from './logo.svg';
 import './App.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import LoginPage from './components/SignIn';
+import SignUpPage from './components/SignUp';
+import HomePage from './components/Home';
+import PrivateRoute from './components/PrivateRoute';
+import Navbar from './components/Navbar';
+import {BrowserRouter, Route} from 'react-router-dom';
+import { AuthProvider } from "../src/Context/authContext";
+import firebase from 'firebase';
+import { useState } from 'react';
+
+
+const getUserMail = () => {
+  const user = firebase.auth().currentUser;
+  if(user) {
+    console.log(user);
+    return "abcd";
+  }
+} 
 
 function App() {
+
+  const [email, setEmail] = useState();
+  const [signedIn, setSignedIn] = useState(false)
+
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      setSignedIn(true);
+      setEmail(user.email);
+      
+    }
+    else{
+      setEmail();
+      setSignedIn(false);
+    }
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <AuthProvider>
+        <div>
+          <Navbar signedIn={signedIn} userMail={email}/>
+          <PrivateRoute exact path="/" component={HomePage} />
+          <Route exact path="/signin" component={LoginPage} />
+          <Route exact path="/signup" component={SignUpPage} />
+        </div>
+      </AuthProvider>
+    </BrowserRouter>
+    
   );
 }
 
